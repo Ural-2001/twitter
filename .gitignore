@@ -1,0 +1,6 @@
+.idea
+obj/
+idea/
+bin/
+Twitter.db
+Migrations/
