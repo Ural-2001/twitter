@@ -54,7 +54,7 @@ namespace Twitter.TagHelpers
                     $"/Home/Like/{TweetId}/?redirectUrl={RedirectUrl}"
                 );
             }
-            output.Content.SetContent($"💟 {likes.Count}");
+            output.Content.SetContent($"👍 {likes.Count}");
         }
     }
 }

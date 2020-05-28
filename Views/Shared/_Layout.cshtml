@@ -26,6 +26,15 @@
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
     </environment>
+    <!-- CSS
+        ================================================== -->
+        <link rel="stylesheet" href="~/css/style.css">
+        <link rel="stylesheet" href="~/css/night-mode.css">
+        <link rel="stylesheet" href="~/css/framework.css">
+
+    <!-- icons
+        ================================================== -->
+        <link rel="stylesheet" href="~/css/icons.css">
     <environment exclude="Development">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
               asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
@@ -35,139 +44,740 @@
     </environment>
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
-<body style="margin-bottom: 0px; overflow: hidden">
-<div class="container">
+<body style="margin-bottom: 0px;">
+<header class=""> 
+    <div class="container">
+         <nav class="" uk-navbar>
+             <!-- left Side Content -->
+             <div class="uk-navbar-left">
+                 <!-- menu icon -->
+                 <span class="mmenu-trigger">
+                     <button class="hamburger hamburger--collapse" type="button">
+                         <span class="hamburger-box">
+                             <span class="hamburger-inner"></span>
+                         </span>
+                     </button>
+                 </span>
+
+                 <!-- logo -->
+                 <a class="uk-logo" asp-area="" asp-controller="Home" asp-action="Index">Twitter</a>
+
+                 <nav id="navigation">
+                     <ul id="responsive">
+                         <li><a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index"><b>@Localizer["Home"]</b></a></li>
+                         <li><a class="" asp-area="" asp-controller="Messages" asp-action="Index">@Localizer["Messages"]</a> </li>
+                         @* <li><a href="/about-us">About us</a> </li> *@
+                         @* <li><a href="/contact">Contact</a> </li> *@
+@*                          @if (User.Identity.IsAuthenticated) *@
+@*                              { *@
+@*                                  <li> *@
+@*                                      <a class=" dropdown-toggle" asp-area="" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> *@
+@*                                          <b>@Localizer["Profile"]</b> *@
+@*                                      </a> *@
+@*                                      <div class="dropdown-menu"> *@
+@*                                          <div class="dropdown-header"> *@
+@*                                              @@@User.Identity.Name *@
+@*                                          </div> *@
+@*                                          <div class="dropdown-divider"></div> *@
+@*                                          <a class="dropdown-item" asp-controller="Profile" asp-action="Index" *@
+@*                                             asp-route-userName="@User.Identity.Name"> *@
+@*                                              @Localizer["MyProfile"] *@
+@*                                          </a> *@
+@*                                          @if (this.User.IsInRole("admin")) *@
+@*                                          { *@
+@*                                              <a class="dropdown-item" asp-controller="Users" asp-action="Index"> *@
+@*                                                  @Localizer["ManageUsers"] *@
+@*                                              </a> *@
+@*                                              <a class="dropdown-item" asp-controller="Roles" asp-action="Index"> *@
+@*                                                  @Localizer["ManageRoles"] *@
+@*                                              </a> *@
+@*                                          } *@
+@*                                          @if (this.User.IsInRole("moderator")) *@
+@*                                          { *@
+@*                                              <a class="dropdown-item" asp-controller="Tweets" asp-action="Index"> *@
+@*                                                  @Localizer["ManageTweets"] *@
+@*                                              </a> *@
+@*                                          } *@
+@*                                          $1$ <form id="logout_form" class="mt-1 dropdown-item form-group" method="post" asp-controller="Account" asp-action="LogOff"> #1# *@
+@*                                          $1$     <input class="form-control btn btn-danger" type="hidden" value="Logout"/> #1# *@
+@*                                          $1$     <a id="logout_button" class="text-danger"> #1# *@
+@*                                          $1$         @Localizer["Logout"] #1# *@
+@*                                          $1$     </a> #1# *@
+@*                                          $1$ </form> #1# *@
+@*                                      </div> *@
+@*                                  </li> *@
+@*                              } *@
+                         <li>
+                             <button data-toggle="modal" data-target="#modal" type="button" class="mt-3 btn btn-primary" style="border-radius: 10px; border:none;  background-color: rgb(62, 66, 106)">
+                                             @Localizer["Tweet"]
+                                         </button>
+                                         <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                             <div class="modal-dialog" role="document">
+                                                 <div class="modal-content">
+                                                     <div class="modal-header">
+                                                         <h5 class="modal-title" id="exampleModalLabel">@Localizer["NewTweet"]</h5>
+                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                             <span aria-hidden="true">&times;</span>
+                                                         </button>
+                                                     </div>
+                                                     <div class="modal-body">
+                                                         <form id="tweet-form" method="post" asp-controller="Home" asp-action="Tweet" class="form-group">
+                                                             <input name="content" class="form-control" placeholder="@Localizer["Placeholder"]"/>
+                                                             <div class="text-right">
+                                                                 <button onclick="document.getElementById('tweet-form').submit();" type="submit"
+                                                                         class=" btn btn-primary" style="border-radius: 10px; border:none;  background-color: rgb(62, 66, 106)">
+                                                                     @Localizer["TweetIt"]
+                                                                 </button>
+                                                             </div>
+                                                         </form>
+                                                     </div>
+                                                 </div>
+                                             </div>
+                                         </div>
+                         </li>
+                     </ul>
+                 </nav>
+                 @*                         <!-- Main Navigation / End --> *@
+
+             </div>
+             <div class="uk-navbar-right">
+             <div class="header-widget">
+
+                      <div class="searchbox uk-visible@s">
+
+                          <input class="uk-search-input" type="search" placeholder="Search...">
+                          <button class="btn-searchbox"> </button>
+
+                      </div>
+                      <!-- Search box dropdown -->
+                      <div uk-dropdown="pos: top;mode:click;animation: uk-animation-slide-bottom-small"
+                           class="dropdown-search">
+                          <div class="erh BR9 MIw"
+                               style="top: -27px;position: absolute ; left: 24px;fill: currentColor;height: 24px;pointer-events: none;color: #f5f5f5;">
+                              <svg width="22" height="22">
+                                  <path d="M0 24 L12 12 L24 24"></path>
+                              </svg>
+                          </div>
+
+
+
+                          <!-- User menu -->
+
+                          <ul class="dropdown-search-list">
+                              <li class="list-title">
+                                  Recent Searches
+                              </li>
+                              <li>
+                                  <a href="course-intro.html">
+                                      Ultimate Web Designer And Developer Course
+                                  </a>
+                              </li>
+                              <li>
+                                  <a href="course-intro.html">
+                                      The Complete Ruby on Rails Developer Course
+                                  </a>
+                              </li>
+                              <li>
+                                  <a href="course-intro.html">
+                                      Bootstrap 4 From Scratch With 5 Real Projects
+                                  </a>
+                              </li>
+                              <li>
+                                  <a href="course-intro.html">
+                                      The Complete 2020 Web Development Bootcamp
+                                  </a>
+                              </li>
+                              <li class="menu-divider">
+                              <li>
+                                  <a href="course-intro.html">
+                                      Bootstrap 4 From Scratch With 5 Real Projects
+                                  </a>
+                              </li>
+                              <li>
+                                  <a href="course-intro.html">
+                                      The Complete 2020 Web Development Bootcamp
+                                  </a>
+                              </li>
+                          </ul>
+
+                      </div>
+
+
+                      @if (User.Identity.IsAuthenticated) {
+
+                      <!-- User icons close mobile-->
+                      <span class="icon-feather-x icon-small uk-hidden@s"
+                            uk-toggle="target: .header-widget ; cls: is-active"> </span>
+
+
+                      <a href="#" class="header-widget-icon"
+                         uk-tooltip="title: My Courses ; pos: bottom ;offset:21">
+                          <i class="uil-youtube-alt"></i>
+                      </a>
+
+                      <!-- courses dropdown List -->
+                      <div uk-dropdown="pos: top;mode:click;animation: uk-animation-slide-bottom-small"
+                           class="dropdown-notifications my-courses-dropdown">
+
+                          <!-- notivication header -->
+                          <div class="dropdown-notifications-headline">
+                              <h4>Your Courses</h4>
+                              <a href="#">
+                                  <i class="icon-feather-settings"
+                                     uk-tooltip="title: Notifications settings ; pos: left"></i>
+                              </a>
+                          </div>
+
+                          <!-- notification contents -->
+                          <div class="dropdown-notifications-content" data-simplebar>
+
+                              <!-- notiviation list -->
+                              <ul>
+                                  <li class="notifications-not-read">
+                                      <a href="course-intro.html">
+                                          <span class="notification-image">
+                                              <img src="~/images/course/1.png" alt="">
+                                          </span>
+                                          <span class="notification-text">
+                                              <span class="course-title">
+                                                  Ultimate Web Designer & Web Developer
+                                              </span>
+                                              <span class="course-number">6/35 </span>
+                                              <span class="course-progressbar">
+                                                  <span class="course-progressbar-filler"
+                                                        style="width:95%"></span>
+                                              </span>
+                                          </span>
+
+                                          <!-- option menu -->
+                                          <span class="btn-option">
+                                              <i class="icon-feather-more-vertical"></i>
+                                          </span>
+                                          <div class="dropdown-option-nav"
+                                               uk-dropdown="pos: bottom-right ;mode : hover">
+                                              <ul>
+                                                  <li>
+                                                      <span>
+                                                          <i class="icon-material-outline-dashboard"></i>
+                                                          Course Dashboard
+                                                      </span>
+                                                  </li>
+                                                  <li>
+                                                      <span>
+                                                          <i class="icon-feather-video"></i>
+                                                          Resume Course
+                                                      </span>
+                                                  </li>
+                                                  <li>
+                                                      <span>
+                                                          <i class="icon-feather-x"></i>
+                                                          Remove Course
+                                                      </span>
+                                                  </li>
+                                              </ul>
+                                          </div>
+                                      </a>
+
+                                  </li>
+                                  <li>
+                                      <a href="course-intro.html">
+                                          <span class="notification-image">
+                                              <img src="~/images/course/3.png" alt="">
+                                          </span>
+                                          <span class="notification-text">
+                                              <span class="course-title">
+                                                  The Complete JavaScript Course Build Real
+                                                  Projects !
+                                              </span>
+                                              <span class="course-number">6/35 </span>
+                                              <span class="course-progressbar">
+                                                  <span class="course-progressbar-filler"
+                                                        style="width:95%"></span>
+                                              </span>
+                                          </span>
+
+                                          <!-- option menu -->
+                                          <span class="btn-option">
+                                              <i class="icon-feather-more-vertical"></i>
+                                          </span>
+                                          <div class="dropdown-option-nav"
+                                               uk-dropdown="pos: bottom-right ;mode : hover">
+                                              <ul>
+                                                  <li>
+                                                      <span>
+                                                          <i class="icon-material-outline-dashboard"></i>
+                                                          Course Dashboard
+                                                      </span>
+                                                  </li>
+                                                  <li>
+                                                      <span>
+                                                          <i class="icon-feather-video"></i>
+                                                          Resume Course
+                                                      </span>
+                                                  </li>
+                                                  <li>
+                                                      <span>
+                                                          <i class="icon-feather-x"></i>
+                                                          Remove Course
+                                                      </span>
+                                                  </li>
+                                              </ul>
+                                          </div>
+
+                                      </a>
+                                  </li>
+                                  <li>
+                                      <a href="course-intro.html">
+                                          <span class="notification-image">
+                                              <img src="~/images/course/2.png" alt="">
+                                          </span>
+                                          <span class="notification-text">
+                                              <span class="course-title">
+                                                  Learn Angular Fundamentals From The
+                                                  Beginning
+                                              </span>
+                                              <span class="course-number">6/35 </span>
+                                              <span class="course-progressbar">
+                                                  <span class="course-progressbar-filler"
+                                                        style="width:95%"></span>
+                                              </span>
+                                          </span>
+
+                                          <!-- option menu -->
+                                          <span class="btn-option">
+                                              <i class="icon-feather-more-vertical"></i>
+                                          </span>
+                                          <div class="dropdown-option-nav"
+                                               uk-dropdown="pos: bottom-right ;mode : hover">
+                                              <ul>
+                                                  <li>
+                                                      <span>
+                                                          <i class="icon-material-outline-dashboard"></i>
+                                                          Course Dashboard
+                                                      </span>
+                                                  </li>
+                                                  <li>
+                                                      <span>
+                                                          <i class="icon-feather-video"></i>
+                                                          Resume Course
+                                                      </span>
+                                                  </li>
+                                                  <li>
+                                                      <span>
+                                                          <i class="icon-feather-x"></i>
+                                                          Remove Course
+                                                      </span>
+                                                  </li>
+                                              </ul>
+                                          </div>
+                                      </a>
+                                  </li>
+                                  <li>
+                                      <a href="course-intro.html">
+                                          <span class="notification-image">
+                                              <img src="~/images/course/1.png" alt="">
+                                          </span>
+                                          <span class="notification-text">
+                                              <span class="course-title">
+                                                  Ultimate Web Designer & Web Developer
+                                              </span>
+                                              <span class="course-number">6/35 </span>
+                                              <span class="course-progressbar">
+                                                  <span class="course-progressbar-filler"
+                                                        style="width:95%"></span>
+                                              </span>
+                                          </span>
+
+                                          <!-- option menu -->
+                                          <span class="btn-option">
+                                              <i class="icon-feather-more-vertical"></i>
+                                          </span>
+                                          <div class="dropdown-option-nav"
+                                               uk-dropdown="pos: top-right ;mode : hover">
+                                              <ul>
+                                                  <li>
+                                                      <span>
+                                                          <i class="icon-material-outline-dashboard"></i>
+                                                          Course Dashboard
+                                                      </span>
+                                                  </li>
+                                                  <li>
+                                                      <span>
+                                                          <i class="icon-feather-video"></i>
+                                                          Resume Course
+                                                      </span>
+                                                  </li>
+                                                  <li>
+                                                      <span>
+                                                          <i class="icon-feather-x"></i>
+                                                          Remove Course
+                                                      </span>
+                                                  </li>
+                                              </ul>
+                                          </div>
+                                      </a>
+                                  </li>
+                              </ul>
+
+                          </div>
+                          <div class="dropdown-notifications-footer">
+                              <a href="#"> sell all</a>
+                          </div>
+                      </div>
+
+                      <!-- notificiation icon  -->
+
+                      <a href="#" class="header-widget-icon"
+                         uk-tooltip="title: Notificiation ; pos: bottom ;offset:21">
+                          <i class="uil-bell"></i>
+                          <span>4</span>
+                      </a>
+
+                      <!-- notificiation dropdown -->
+                      <div uk-dropdown="pos: top-right;mode:click ; animation: uk-animation-slide-bottom-small"
+                           class="dropdown-notifications">
+
+                          <!-- notivication header -->
+                          <div class="dropdown-notifications-headline">
+                              <h4>Notifications </h4>
+                              <a href="#">
+                                  <i class="icon-feather-settings"
+                                     uk-tooltip="title: Notifications settings ; pos: left"></i>
+                              </a>
+                          </div>
+
+                          <!-- notification contents -->
+                          <div class="dropdown-notifications-content" data-simplebar>
+
+                              <!-- notiviation list -->
+                              <ul>
+                                  <li class="notifications-not-read">
+                                      <a href="#">
+                                          <span class="notification-icon btn btn-soft-danger disabled">
+                                              <i class="icon-feather-thumbs-up"></i>
+                                          </span>
+                                          <span class="notification-text">
+                                              <strong>Adrian Mohani</strong> Like Your Comment On Course
+                                              <span class="text-primary">Javascript Introduction </span>
+                                              <br> <span class="time-ago"> 9 hours ago </span>
+                                          </span>
+                                      </a>
+                                  </li>
+                                  <li>
+                                      <a href="#">
+                                          <span class="notification-icon btn btn-soft-primary disabled">
+                                              <i class="icon-feather-message-circle"></i>
+                                          </span>
+                                          <span class="notification-text">
+                                              <strong>Stella Johnson</strong> Replay Your Comments in
+                                              <span class="text-primary">Programming for Games</span>
+                                              <br> <span class="time-ago"> 12 hours ago </span>
+                                          </span>
+                                      </a>
+                                  </li>
+                                  <li>
+                                      <a href="#">
+                                          <span class="notification-icon btn btn-soft-success disabled">
+                                              <i class="icon-feather-star"></i>
+                                          </span>
+                                          <span class="notification-text">
+                                              <strong>Alex Dolgove</strong> Added New Review In Course
+                                              <span class="text-primary">Full Stack PHP Developer</span>
+                                              <br> <span class="time-ago"> 19 hours ago </span>
+                                          </span>
+                                      </a>
+                                  </li>
+                                  <li class="notifications-not-read">
+                                      <a href="#">
+                                          <span class="notification-icon btn btn-soft-danger disabled">
+                                              <i class="icon-feather-share-2"></i>
+                                          </span>
+                                          <span class="notification-text">
+                                              <strong>Jonathan Madano</strong> Shared Your Discussion On Course
+                                              <span class="text-primary">Css Flex Box </span>
+                                              <br> <span class="time-ago"> Yesterday </span>
+                                          </span>
+                                      </a>
+                                  </li>
+                              </ul>
+
+                          </div>
+
+
+                      </div>
+
+
+                      <!-- Message  -->
+
+                      <a href="#" class="header-widget-icon" uk-tooltip="title: Message ; pos: bottom ;offset:21">
+                          <i class="uil-envelope-alt"></i>
+                          <span>1</span>
+                      </a>
+
+                      <!-- Message  notificiation dropdown -->
+                      <div uk-dropdown=" pos: top-right;mode:click" class="dropdown-notifications">
+
+                          <!-- notivication header -->
+                          <div class="dropdown-notifications-headline">
+                              <h4>Messages</h4>
+                              <a href="#">
+                                  <i class="icon-feather-settings"
+                                     uk-tooltip="title: Message settings ; pos: left"></i>
+                              </a>
+                          </div>
+
+                          <!-- notification contents -->
+                          <div class="dropdown-notifications-content" data-simplebar>
+
+                              <!-- notiviation list -->
+                              <ul>
+                                  <li class="notifications-not-read">
+                                      <a href="#">
+                                          <span class="notification-avatar">
+                                              <img src="~/images/avatars/avatar-2.jpg" alt="">
+                                          </span>
+                                          <div class="notification-text notification-msg-text">
+                                              <strong>Jonathan Madano</strong>
+                                              <p>
+                                                  Okay.. Thanks for The Answer I will be waiting for your...
+                                              </p>
+                                              <span class="time-ago"> 2 hours ago </span>
+                                          </div>
+                                      </a>
+                                  </li>
+                                  <li>
+                                      <a href="#">
+                                          <span class="notification-avatar">
+                                              <img src="~/images/avatars/avatar-3.jpg" alt="">
+                                          </span>
+                                          <div class="notification-text notification-msg-text">
+                                              <strong>Stella Johnson</strong>
+                                              <p>
+                                                  Alex will explain you how to keep the HTML structure and all
+                                                  that...
+                                              </p>
+                                              <span class="time-ago"> 7 hours ago </span>
+                                          </div>
+                                      </a>
+                                  </li>
+                                  <li>
+                                      <a href="#">
+                                          <span class="notification-avatar">
+                                              <img src="~/images/avatars/avatar-1.jpg" alt="">
+                                          </span>
+                                          <div class="notification-text notification-msg-text">
+                                              <strong>Alex Dolgove</strong>
+                                              <p>
+                                                  Alia Joseph just joined Messenger! Be the first to send a
+                                                  welcome message..
+                                              </p>
+                                              <span class="time-ago"> 19 hours ago </span>
+                                          </div>
+                                      </a>
+                                  </li>
+                                  <li>
+                                      <a href="#">
+                                          <span class="notification-avatar">
+                                              <img src="~/images/avatars/avatar-4.jpg" alt="">
+                                          </span>
+                                          <div class="notification-text notification-msg-text">
+                                              <strong>Adrian Mohani</strong>
+                                              <p>
+                                                  Okay.. Thanks for The Answer I will be waiting for your...
+                                              </p>
+                                              <span class="time-ago"> Yesterday </span>
+                                          </div>
+                                      </a>
+                                  </li>
+                              </ul>
+
+                          </div>
+                          <div class="dropdown-notifications-footer">
+                              <a href="#"> sell all <i class="icon-line-awesome-long-arrow-right"></i> </a>
+                          </div>
+                      </div>
+
+
+                      <!-- profile-icon-->
+
+                      <a href="#" class="header-widget-icon profile-icon">
+                          <img src="~/images/avatars/avatar-2.jpg" alt="" class="header-profile-icon">
+                      </a>
+
+                      <div uk-dropdown="pos: top-right ;mode:click" class="dropdown-notifications small">
+
+                          <!-- User Name / Avatar -->
+                          <a asp-controller="Profile" asp-action="Index"
+                             asp-route-userName="@User.Identity.Name">
+
+                              <div class="dropdown-user-details">
+                                  <div class="dropdown-user-avatar">
+                                      <img src="~/images/avatars/avatar-2.jpg" alt="">
+                                  </div>
+                                  <div class="dropdown-user-name">
+                                      @User.Identity.Name
+                                      <span>Students</span>
+                                  </div>
+                              </div>
+
+                          </a>
+
+                          <!-- User menu -->
+
+                          <ul class="dropdown-user-menu">
+                              <li>
+                                  <form id="logout_form" class="mt-1 dropdown-item form-group" method="post" asp-controller="Account" asp-action="LogOff">
+                                                                               <input class="form-control btn btn-danger" type="hidden" value="Logout"/>
+                                                                               <a id="logout_button" class="text-danger">
+                                                                                   @Localizer["Logout"]
+                                                                               </a>
+                                                                           </form>
+                              </li>
+                          </ul>
+                      </div>
+                      }
+                      else {
+                          <nav id="navigation">
+                              <ul id="responsive">
+                                  <li><a href="/login">Login</a> </li>
+                              </ul>
+                          </nav>
+                      }
+             </div>
+             <!-- icon search-->
+                  <a class="uk-navbar-toggle uk-hidden@s"
+                     uk-toggle="target: .nav-overlay; animation: uk-animation-fade" href="#">
+                      <i class="uil-search icon-small"></i>
+                  </a>
+
+                  <!-- User icons -->
+                  <a href="#" class="uil-user icon-small uk-hidden@s"
+                     uk-toggle="target: .header-widget ; cls: is-active">
+                  </a>
+
+              </div>
+         </nav>
+    </div>
+</header>
+<div class="container mt-3">
     <div class="">
-                <div class="d-flex bd-highlight mb-3">
-                    <div class="p-2 bd-highlight">
-                        <a class="ml-3 navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
-                            @Localizer["Twitter"]
-                        </a>
+        <div class="" style="">
+            <partial name="_CookieConsentPartial"/>
+            <main role="main" class="">
+                <div style="">
+                    @RenderBody()
+                </div>
+            </main>
+        </div>
+        @* <div class="mt-5"> *@
+        @*     <div class="d-flex flex-column bd-highlight"> *@
+        @*         <div class="bd-highlight flex-fill"> *@
+        @*             &copy; 2019 - @Localizer["Twitter"] - <a asp-area="" asp-controller="Home" asp-action="Privacy">@Localizer["Privacy"]</a> *@
+        @*         </div> *@
+        @* *@
+        @*         <div class="pr-1 mr-3 flex-fill"> *@
+        @*             <form asp-controller="Language" asp-action="SetLanguage" style="margin-top:20px;" *@
+        @*                   asp-route-returnUrl="@Context.Request.Path" method="post" class="form-horizontal"> *@
+        @*                 <select class="form-control form-control-sm" name="culture" onchange="this.form.submit();" *@
+        @*                         asp-for="@requestCulture.RequestCulture.UICulture.Name" asp-items="cultureItems"> *@
+        @*                 </select> *@
+        @*             </form> *@
+        @*         </div> *@
+        @*     </div> *@
+        @* </div> *@
+    </div>
+    <div class="mt-5">
+        <div class="">
+            <div class="uk-grid">
+                <div class="uk-width-1-3@m">
+                    <a href="home.html" class="uk-logo">
+                        <!-- logo icon -->
+                        <i class="uil-graduation-hat"> </i>
+                        Twitter
+                    </a>
+                    <p class="footer-description">
+                        This website made on ASP.NET Core by members of CODERLAR for Computer Science lesson.
+                        Courseme is Learning Managment System.
+                    </p>
+                </div>
+                <div class="uk-width-expand@s uk-width-1-2">
+                    <div class="footer-links pl-lg-8">
+                        <h5>Explore </h5>
+                        <ul>
+                            <li><a href="course-card.html"> Courses </a></li>
+                            <li><a href="course-path.html"> Track </a></li>
+                            <li><a href="blog-card.html"> Blog </a></li>
+                        </ul>
                     </div>
-                    <div class="p-2 bd-highlight">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">
-                            @Localizer["Home"]
-                        </a>
+                </div>
+                <div class="uk-width-expand@s uk-width-1-2">
+                    <div class="footer-links pl-lg-8">
+                        <h5> Account </h5>
+                        <ul>
+                            <li><a href="profile-1.html"> Profile </a></li>
+                            <li><a href="#"> Settings </a></li>
+                            <li><a href="#"> Projects </a></li>
+                        </ul>
                     </div>
-                    <div class="p-2 bd-highlight">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Messages" asp-action="Index">
-                            @Localizer["Messages"]
-                        </a>
-                    </div>
-                    <div class="p-2 bd-highlight">
-                        @if (User.Identity.IsAuthenticated)
-                        {
-                            <a class="nav-link dropdown-toggle" asp-area="" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                @Localizer["Profile"]
-                            </a>
-                            <div class="dropdown-menu">
-                                <div class="dropdown-header">
-                                    @@@User.Identity.Name 
-                                </div>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" asp-controller="Profile" asp-action="Index"
-                                   asp-route-userName="@User.Identity.Name">
-                                    @Localizer["MyProfile"]
-                                </a>
-                                @if (this.User.IsInRole("admin"))
-                                {
-                                    <a class="dropdown-item" asp-controller="Users" asp-action="Index">
-                                        @Localizer["ManageUsers"]
-                                    </a>
-                                    <a class="dropdown-item" asp-controller="Roles" asp-action="Index">
-                                        @Localizer["ManageRoles"]
-                                    </a>
-                                }
-                                @if (this.User.IsInRole("moderator"))
-                                {
-                                    <a class="dropdown-item" asp-controller="Tweets" asp-action="Index">
-                                        @Localizer["ManageTweets"]
-                                    </a>
-                                } 
-                                <form id="logout_form" class="mt-1 dropdown-item form-group" method="post" asp-controller="Account" asp-action="LogOff">
-                                    <input class="form-control btn btn-danger" type="hidden" value="Logout"/>
-                                    <a id="logout_button" class="text-danger">
-                                        @Localizer["Logout"]
-                                    </a>
-                                </form>
-                            </div>
-                        }
-                    </div>
-                    <button data-toggle="modal" data-target="#modal" type="button" class="nav-link btn btn-primary mt-2" style="border-radius: 20px">
-                        @Localizer["Tweet"]
-                    </button>
-                    <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">@Localizer["NewTweet"]</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <form id="tweet-form" method="post" asp-controller="Home" asp-action="Tweet" class="form-group">
-                                        <input name="content" class="form-control" placeholder="@Localizer["Placeholder"]"/>
-                                        <div class="text-right">
-                                            <button onclick="document.getElementById('tweet-form').submit();" type="submit"
-                                                    class="mt-4 btn btn-primary">
-                                                @Localizer["TweetIt"]
-                                            </button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
+                </div>
+                <div class="uk-width-expand@s uk-width-1-2">
+                    <div class="footer-links pl-lg-8">
+                        <h5> Resources</h5>
+                        <ul>
+                            <li><a href="#"> Contact </a></li>
+                            <li><a href="page-Privacy.html"> Privacy Policy </a></li>
+                            <li><a href="page-term.html"> Terms of Use </a></li>
+                        </ul>
                     </div>
                 </div>
             </div>
-    <div class="row">
-        <div class="col" style="border: solid lightgray 1px;">
-            <partial name="_CookieConsentPartial"/>
-            <main role="main" class="text-center">
-                @RenderBody()
-            </main>
-        </div>
-        <div class="p-3 col">
-            <div class="d-flex flex-column bd-highlight">
-                <div class="bd-highlight flex-fill">
-                    &copy; 2019 - @Localizer["Twitter"] - <a asp-area="" asp-controller="Home" asp-action="Privacy">@Localizer["Privacy"]</a>
+            <hr>
+            <div class="uk-grid-collapse" uk-grid>
+                <div class="uk-width-expand@s uk-first-column">
+                    <p>© 2020 <strong>Courseme</strong>. All Rights Reserved. </p>
                 </div>
-                
-                <div class="pr-1 mr-3 flex-fill">
-                    <form asp-controller="Language" asp-action="SetLanguage" style="margin-top:20px;"
-                          asp-route-returnUrl="@Context.Request.Path" method="post" class="form-horizontal">
-                        <select class="form-control form-control-sm" name="culture" onchange="this.form.submit();"
-                                asp-for="@requestCulture.RequestCulture.UICulture.Name" asp-items="cultureItems">
-                        </select>
-                    </form>
+                <div class="uk-width-auto@s">
+                    <nav class="footer-nav-icon">
+                        <ul>
+                            <li><a href="#"><i class="icon-brand-facebook"></i></a></li>
+                            <li><a href="#"><i class="icon-brand-dribbble"></i></a></li>
+                            <li><a href="#"><i class="icon-brand-youtube"></i></a></li>
+                            <li><a href="#"><i class="icon-brand-twitter"></i></a></li>
+                        </ul>
+                    </nav>
                 </div>
             </div>
         </div>
     </div>
+    <form asp-controller="Language" asp-action="SetLanguage" style="margin-top:20px;"
+          asp-route-returnUrl="@Context.Request.Path" method="post" class="form-horizontal">
+        <select class="form-control form-control-sm" name="culture" onchange="this.form.submit();"
+                asp-for="@requestCulture.RequestCulture.UICulture.Name" asp-items="cultureItems">
+        </select>
+    </form>
 </div>
 
 <environment include="Development">
-        <script src="~/lib/jquery/dist/jquery.js"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
-    </environment>
-    <environment exclude="Development">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
-                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
-                asp-fallback-test="window.jQuery"
-                crossorigin="anonymous"
-                integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=">
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
+            asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+            asp-fallback-test="window.jQuery"
+            crossorigin="anonymous"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=">
         </script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"
-                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"
-                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
-                crossorigin="anonymous"
-                integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"
+            asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"
+            asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+            crossorigin="anonymous"
+            integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o">
         </script>
-    </environment>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+</environment>
+<script src="~/js/site.js" asp-append-version="true"></script>
 
-    @RenderSection("Scripts", required: false)
+@RenderSection("Scripts", required: false)
 
 <script src="~/js/signalr/dist/browser/signalr.js"></script>
 <script>
@@ -189,5 +799,11 @@
        });
      });
 </script>
+<script src="~/js/framework.js"></script>
+<script src="~/js/jquery-3.3.1.min.js"></script>
+<script src="~/js/mmenu.min.js"></script>
+<script src="~/js/simplebar.js"></script>
+<script src="~/js/main.js"></script>
+<script src="~/js/bootstrap-select.min.js"></script>
 </body>
 </html>

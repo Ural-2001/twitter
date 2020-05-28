@@ -28,7 +28,7 @@ namespace Twitter.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
-                return View(await GetFeed());
+                return View(await AllTweets());
             }
             else
             {
@@ -198,6 +198,21 @@ namespace Twitter.Controllers
                 .ToListAsync();
             return feedConcat;
         }
+        
+        private async Task<List<Tweet>> AllTweets()
+        {
+            var tweets = _context.Tweets;
+            var feed = _context.Subscriptions
+                .Select(u => u.SubscribedOnUser)
+                .SelectMany(t => t.Tweets)
+                .Include(t => t.Author);
+            var feedConcat = await feed
+                .Concat(tweets)
+                .OrderByDescending(t => t.Date)
+                .ToListAsync();
+            return feedConcat;
+        }
+        
         
         public async Task<IActionResult> Replies(int id)
         {

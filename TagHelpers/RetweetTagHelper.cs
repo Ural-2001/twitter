@@ -54,7 +54,7 @@ namespace Twitter.TagHelpers
                     $"/Home/Retweet/{TweetId}/?redirectUrl={RedirectUrl}"
                 );
             }
-            output.Content.SetContent($"🔃 {retweets.Count}");
+            output.Content.SetContent($"📢 {retweets.Count}");
         }
     }
 }

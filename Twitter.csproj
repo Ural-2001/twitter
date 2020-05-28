@@ -35,6 +35,26 @@
       <_ContentIncludedByDefault Remove="Views\Tweets\Details.cshtml" />
       <_ContentIncludedByDefault Remove="Views\Tweets\Edit.cshtml" />
       <_ContentIncludedByDefault Remove="Views\Tweets\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="wwwroot\css\fonts\Brand-Icons.svg" />
+      <_ContentIncludedByDefault Remove="wwwroot\css\fonts\Brand-Icons.ttf" />
+      <_ContentIncludedByDefault Remove="wwwroot\css\fonts\Brand-Icons.woff" />
+      <_ContentIncludedByDefault Remove="wwwroot\css\fonts\Feather-Icons.svg" />
+      <_ContentIncludedByDefault Remove="wwwroot\css\fonts\Feather-Icons.ttf" />
+      <_ContentIncludedByDefault Remove="wwwroot\css\fonts\Feather-Icons.woff" />
+      <_ContentIncludedByDefault Remove="wwwroot\css\fonts\Gotham-Rounded-Bold.ttf" />
+      <_ContentIncludedByDefault Remove="wwwroot\css\fonts\Gotham-Rounded-Medium.ttf" />
+      <_ContentIncludedByDefault Remove="wwwroot\css\fonts\Gotham-Rounded.ttf" />
+      <_ContentIncludedByDefault Remove="wwwroot\css\fonts\Line-Awesome.svg" />
+      <_ContentIncludedByDefault Remove="wwwroot\css\fonts\Line-Awesome.ttf" />
+      <_ContentIncludedByDefault Remove="wwwroot\css\fonts\Line-Awesome.woff" />
+      <_ContentIncludedByDefault Remove="wwwroot\css\fonts\Material-Icons.svg" />
+      <_ContentIncludedByDefault Remove="wwwroot\css\fonts\Material-Icons.ttf" />
+      <_ContentIncludedByDefault Remove="wwwroot\css\fonts\Material-Icons.woff" />
+      <_ContentIncludedByDefault Remove="wwwroot\css\fonts\unicons.eot" />
+      <_ContentIncludedByDefault Remove="wwwroot\css\fonts\unicons.svg" />
+      <_ContentIncludedByDefault Remove="wwwroot\css\fonts\unicons.ttf" />
+      <_ContentIncludedByDefault Remove="wwwroot\css\fonts\unicons.woff" />
+      <_ContentIncludedByDefault Remove="wwwroot\css\fonts\unicons.woff2" />
     </ItemGroup>
 
     <ItemGroup>
