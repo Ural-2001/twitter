@@ -218,6 +218,13 @@ namespace Twitter
                 {
                     controller = "Roles", action = "Edit"
                 });
+                
+                
+                routes.MapRoute(name: "ContactPage", template: "Contact", new
+                {
+                    controller = "Home",
+                    action = "Contact"
+                });
             });
         }
     }
