@@ -11,6 +11,9 @@ using Microsoft.AspNetCore.Localization;
 using System.Globalization;
 using Microsoft.AspNetCore.Routing.Constraints;
 using Microsoft.Extensions.Options;
+using React.AspNet;
+using JavaScriptEngineSwitcher.ChakraCore;
+using JavaScriptEngineSwitcher.Extensions.MsDependencyInjection;
 
 namespace Twitter
 {
@@ -49,6 +52,12 @@ namespace Twitter
                 .AddDataAnnotationsLocalization()
                 .AddViewLocalization();
             
+            
+            services.AddMemoryCache();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddReact();
+            services.AddJsEngineSwitcher(options => options.DefaultEngineName = ChakraCoreJsEngine.EngineName).AddChakraCore();
+            
             services.Configure<RequestLocalizationOptions>(options =>
             {
                 var supportedCultures = new []
@@ -68,6 +77,13 @@ namespace Twitter
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            app.UseDeveloperExceptionPage();
+ 
+            app.UseReact(config => { });
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
+            
+            
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
