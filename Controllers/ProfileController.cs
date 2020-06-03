@@ -21,6 +21,22 @@ namespace Twitter.Controllers
             _userManager = userManager;
             _context = context;
         }
+        
+        public async Task<IActionResult> Premium()
+        {
+            var currentUser = await _userManager
+                .FindByNameAsync(User.Identity.Name);
+            if (currentUser.IsPremium)
+            {
+                currentUser.IsPremium = false;
+            }
+            else
+            {
+                currentUser.IsPremium = true;
+            }
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Index", "Profile");
+        }
 
         public async Task<IActionResult> Follow(string userName)
         {

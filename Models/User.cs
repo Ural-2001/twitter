@@ -8,10 +8,12 @@ namespace Twitter.Models
     public class User: IdentityUser
     { 
         public string Name { get; set; }
-        
+
         public ICollection<Tweet> Tweets { get; set; }
 
         public ICollection<Reply> Replies { get; set; }
+        
+        public bool IsPremium { get; set; }
 
         public override string ToString()
         {

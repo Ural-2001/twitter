@@ -65,7 +65,10 @@
                  <nav id="navigation">
                      <ul id="responsive">
                          <li><a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index"><b>@Localizer["Home"]</b></a></li>
-                         <li><a class="" asp-area="" asp-controller="Messages" asp-action="Index">@Localizer["Messages"]</a> </li>
+                         @* @if (User.Identity) *@
+                         @* { *@
+                             <li><a class="" asp-area="" asp-controller="Messages" asp-action="Index">@Localizer["Messages"]</a> </li>
+                         @* } *@
                          <li><a class="" asp-area="" asp-controller="Home" asp-action="Contact">@Localizer["Contacts"]</a> </li>
                          @* <li><a href="/contact">Contact</a> </li> *@
                          @* <li><a href="/about-us">About us</a> </li> *@
@@ -603,7 +606,7 @@
                       <!-- profile-icon-->
 
                       <a href="#" class="header-widget-icon profile-icon">
-                          <img src="~/images/avatars/avatar-2.jpg" alt="" class="header-profile-icon">
+                          <img src="~/images/default.jpg" alt="" class="header-profile-icon">
                       </a>
 
                       <div uk-dropdown="pos: top-right ;mode:click" class="dropdown-notifications small">
@@ -614,7 +617,7 @@
 
                               <div class="dropdown-user-details">
                                   <div class="dropdown-user-avatar">
-                                      <img src="~/images/avatars/avatar-2.jpg" alt="">
+                                      <img src="~/images/default.jpg" alt="">
                                   </div>
                                   <div class="dropdown-user-name">
                                       @User.Identity.Name
