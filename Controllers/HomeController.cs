@@ -5,12 +5,19 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using Twitter.Models;
 using Twitter.ViewModels;
+// using static Microsoft.Extensions.Hosting.IHostingEnvironment;
+
+using Microsoft.AspNetCore.Hosting;
+// using IHostingEnvironment = Microsoft.Extensions.Hosting.IHostingEnvironment;
+// using IWebHostingEnvironment = Microsoft.Extensions.Hosting.IHostingEnvironment;
 
 namespace Twitter.Controllers
 {
@@ -19,10 +26,12 @@ namespace Twitter.Controllers
     {
         private readonly TwitterDBContext _context;
         private readonly UserManager<User> _userManager;
-        public HomeController(TwitterDBContext context, UserManager<User> userManager)
+        IHostingEnvironment _appEnvironment;
+        public HomeController(TwitterDBContext context, UserManager<User> userManager, IHostingEnvironment appEnvironment)
         {
             _context = context;
             _userManager = userManager;
+            _appEnvironment = appEnvironment;
         }
         public async Task<IActionResult> Index()
         {
@@ -274,6 +283,24 @@ namespace Twitter.Controllers
                 });
                 await _context.SaveChangesAsync();
             }
+            return RedirectToAction("Index");
+        }
+        public async Task<IActionResult> MyFile(IFormFile uploadedFile)
+        {
+            if (uploadedFile != null)
+            {
+                // путь к папке Files
+                string path = "/Files/" + uploadedFile.FileName;
+                // сохраняем файл в папку Files в каталоге wwwroot
+                using (var fileStream = new FileStream(_appEnvironment.WebRootPath + path, FileMode.Create))
+                {
+                    await uploadedFile.CopyToAsync(fileStream);
+                }
+                FileModel file = new FileModel { Name = uploadedFile.FileName, Path = path };
+                _context.Files.Add(file);
+                _context.SaveChanges();
+            }
+            
             return RedirectToAction("Index");
         }
         

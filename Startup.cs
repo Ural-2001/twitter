@@ -146,6 +146,10 @@ namespace Twitter
                 {
                     controller = "Home", action = "Privacy"
                 });
+                routes.MapRoute(name: "MyFile", template: "Home/MyFile", new
+                {
+                    controller = "Home", action = "MyFile"
+                });
                 routes.MapRoute(name: "Register", template: "Account/Register", new
                 {
                     controller = "Account", action = "Register"
@@ -177,6 +181,10 @@ namespace Twitter
                 routes.MapRoute(name: "Follow", template: "Profile/Follow/{userName?}", new
                 {
                     controller = "Profile", action = "Follow"
+                });
+                routes.MapRoute(name: "Premium", template: "Profile/Premium/", new
+                {
+                    controller = "Profile", action = "Premium"
                 });
                 routes.MapRoute(name: "Unfollow", template: "Profile/Unfollow/{userName?}", new
                 {

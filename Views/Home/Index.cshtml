@@ -1,5 +1,8 @@
 ﻿@using Microsoft.AspNetCore.Mvc.Localization
-@model IEnumerable<Tweet> 
+@using Microsoft.AspNetCore.Razor
+@* @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers *@
+@model IEnumerable<Tweet>
+@* @model IEnumerable<Twitter.Models.FileModel> *@
 @inject IViewLocalizer Localizer
 
 @{
@@ -9,11 +12,12 @@
 <div class="text-left mt-3">
     <h3 class="display-6">@ViewData["Title"]</h3>
 </div>
+
 <hr/>
-<div style="overflow-y: scroll; height: 730px;">
-     @foreach (var tweet in Model)
-        {
-            @await Component.InvokeAsync("Tweet", new { id = tweet.Id })
-            <hr/>
-        }
+<div style="overflow-y: scroll; height: 400px; background-color: #4c8bb1; padding: 10px; border-radius: 20px">
+      @foreach (var tweet in Model)
+         {
+             @await Component.InvokeAsync("Tweet", new { id = tweet.Id })
+             <hr/>
+         }
 </div>

@@ -65,10 +65,7 @@
                  <nav id="navigation">
                      <ul id="responsive">
                          <li><a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index"><b>@Localizer["Home"]</b></a></li>
-                         @* @if (User.Identity) *@
-                         @* { *@
-                             <li><a class="" asp-area="" asp-controller="Messages" asp-action="Index">@Localizer["Messages"]</a> </li>
-                         @* } *@
+                         <li><a class="" asp-area="" asp-controller="Messages" asp-action="Index">@Localizer["Messages"]</a> </li>
                          <li><a class="" asp-area="" asp-controller="Home" asp-action="Contact">@Localizer["Contacts"]</a> </li>
                          @* <li><a href="/contact">Contact</a> </li> *@
                          @* <li><a href="/about-us">About us</a> </li> *@
@@ -662,6 +659,13 @@
 
               </div>
          </nav>
+    </div>
+    <div class="container">
+        <h3>Выберите файл для загрузки</h3>
+        <form id="file-form" method="post" asp-controller="Home" asp-action="MyFile" enctype="multipart/form-data">
+            <input class="btn-default btn" type="file" name="uploadedFile" /><br>
+            <input class="btn btn-primary" type="submit" value="Загрузить" />
+        </form>
     </div>
 </header>
 <div class="container mt-3">

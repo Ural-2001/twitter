@@ -11,10 +11,21 @@
     <h3 class="display-6">@ViewData["Title"]</h3>
 </div>
 <div class="mt-3">
-    <a asp-action="Premium" asp-route-userName="@Model.User.UserName"
+    <a asp-action="Premium" asp-controller="Profile" asp-route-userName="@Model.User.UserName"
        class="btn btn-primary mt-1" style="border-radius: 10px">
         @Model.User.IsPremium
     </a>
+</div>
+
+<div class="mt-3">
+    @if (Model.User.IsPremium)
+    { 
+     <a class="" style="" asp-area="" asp-controller="Messages" asp-action="Index">@Localizer["Messages"]</a>
+    }
+@*     @if (!Model.User.IsPremium) *@
+@*     {  *@
+@*      <a class="disabled" disabled="true" asp-area="" asp-controller="Messages" asp-action="Index">@Localizer["Messages"]</a> *@
+@*     } *@
 </div>
 
 <hr/>

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -22,22 +23,17 @@ namespace Twitter.Controllers
             _context = context;
         }
         
-        public async Task<IActionResult> Premium()
+        public async Task<IActionResult> Premium(string userName)
         {
-            var currentUser = await _userManager
-                .FindByNameAsync(User.Identity.Name);
-            if (currentUser.IsPremium)
+            var currentUser = await _userManager.FindByNameAsync(User.Identity.Name);
+            currentUser.IsPremium = !currentUser.IsPremium;
+            await _context.SaveChangesAsync(currentUser.IsPremium);
+            return RedirectToAction("Index", "Profile", new
             {
-                currentUser.IsPremium = false;
-            }
-            else
-            {
-                currentUser.IsPremium = true;
-            }
-            await _context.SaveChangesAsync();
-            return RedirectToAction("Index", "Profile");
+                userName = currentUser.UserName
+            });
         }
-
+        
         public async Task<IActionResult> Follow(string userName)
         {
             var currentUser = await _userManager

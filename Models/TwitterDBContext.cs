@@ -16,6 +16,8 @@ namespace Twitter.Models
         public DbSet<Message> Messages { get; set; }
         
         public DbSet<Like> Likes { get; set; }
+        
+        public DbSet<FileModel> Files { get; set; }
 
         public TwitterDBContext(DbContextOptions<TwitterDBContext> options) : base(options)
         {
