@@ -288,7 +288,7 @@ namespace Twitter.Controllers
         }
         public async Task<IActionResult> MyFile(IFormFile uploadedFile)
         {
-            var currentUser = await _userManager.FindByNameAsync(User.Identity.Name);
+            var currentUser = _userManager.FindByNameAsync(User.Identity.Name);
             if (uploadedFile != null)
             {
                 // путь к папке Files
@@ -302,8 +302,11 @@ namespace Twitter.Controllers
                 _context.Files.Add(file);
                 _context.SaveChanges();
             }
-
-            return RedirectToAction("Index");
+            
+            return RedirectToAction("Index", "Profile", new
+            {
+                userName = currentUser
+            });
         }
         
         public string Privacy()
